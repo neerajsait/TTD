@@ -1,0 +1,9 @@
+{
+  "name": "ttd-smartfill-pro",
+  "private": true,
+  "version": "1.0.0",
+  "description": "TTD SmartFill Pro Chrome Extension",
+  "scripts": {
+    "verify": "node scripts/verify.mjs"
+  }
+}

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TTD SmartFill Pro · Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="settings-shell">
+      <header class="settings-header">
+        <div class="brand-mark">T</div>
+        <div>
+          <p class="eyebrow">TTD SMARTFILL PRO</p>
+          <h1>Settings</h1>
+          <p class="subtitle">Control how your local autofill helper behaves on supported TTD pages.</p>
+        </div>
+      </header>
+
+      <div class="settings-grid">
+        <section class="settings-card">
+          <div class="card-title">
+            <div>
+              <h2>Fill behavior</h2>
+              <p>Choose when and how SmartFill updates a form.</p>
+            </div>
+            <span class="card-icon">↗</span>
+          </div>
+          <label class="toggle-row">
+            <span><strong>Auto-fill when page loads</strong><small>Use General Details and the default profile without a button click.</small></span>
+            <input id="auto-fill" type="checkbox" />
+            <i class="toggle" aria-hidden="true"></i>
+          </label>
+          <label class="toggle-row">
+            <span><strong>Overwrite existing values</strong><small>Off by default so data you already typed is protected.</small></span>
+            <input id="overwrite" type="checkbox" />
+            <i class="toggle" aria-hidden="true"></i>
+          </label>
+          <label class="select-row">
+            <span><strong>Fill speed</strong><small>Human-like pacing gives dynamic forms time to react.</small></span>
+            <select id="fill-speed"><option value="instant">Instant</option><option value="human">Human-like</option></select>
+          </label>
+        </section>
+
+        <section class="settings-card">
+          <div class="card-title">
+            <div>
+              <h2>Default profile</h2>
+              <p>This profile is used by auto-fill and the keyboard shortcut.</p>
+            </div>
+            <span class="card-icon">◎</span>
+          </div>
+          <label class="field-label" for="default-profile">Profile used automatically</label>
+          <select id="default-profile" class="large-select"></select>
+          <p class="hint" id="default-profile-hint">Create a profile in the popup to choose it here.</p>
+        </section>
+
+        <section class="settings-card">
+          <div class="card-title">
+            <div>
+              <h2>Keyboard shortcut</h2>
+              <p>The browser-managed shortcut fills every visible row.</p>
+            </div>
+            <span class="card-icon">⌘</span>
+          </div>
+          <label class="field-label" for="shortcut">Shortcut label</label>
+          <input id="shortcut" class="large-input" value="Ctrl+Shift+F" maxlength="40" />
+          <p class="hint">To change the actual Chrome shortcut, open <strong>chrome://extensions/shortcuts</strong>. This label keeps the in-page shortcut in sync.</p>
+        </section>
+
+        <section class="settings-card">
+          <div class="card-title">
+            <div>
+              <h2>Appearance</h2>
+              <p>SmartFill never changes the TTD website theme.</p>
+            </div>
+            <span class="card-icon">◐</span>
+          </div>
+          <div class="theme-options" role="group" aria-label="Theme">
+            <button data-theme="system" class="theme-option"><span>◌</span> System</button>
+            <button data-theme="light" class="theme-option"><span>☼</span> Light</button>
+            <button data-theme="dark" class="theme-option"><span>◑</span> Dark</button>
+          </div>
+        </section>
+
+        <section class="settings-card privacy-card">
+          <div class="card-title">
+            <div>
+              <h2>Your data stays yours</h2>
+              <p>SmartFill uses Chrome local storage only. It has no analytics, network API, account, or telemetry.</p>
+            </div>
+            <span class="shield">✓</span>
+          </div>
+          <div class="privacy-points">
+            <span>Local-only storage</span><span>TTD domains only</span><span>No third parties</span>
+          </div>
+        </section>
+      </div>
+
+      <footer class="settings-footer">
+        <span>TTD SmartFill Pro · Unofficial extension, not affiliated with TTD</span>
+        <button class="save-button" id="save-settings">Save settings</button>
+      </footer>
+      <div class="saved-message" id="saved-message" role="status" aria-live="polite">Settings saved</div>
+    </main>
+    <script src="shared/constants.js"></script>
+    <script src="shared/storage.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "TTD SmartFill Pro",
+  "version": "1.0.0",
+  "description": "Private, local-only autofill for TTD booking forms.",
+  "minimum_chrome_version": "102",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*.ttdevasthanams.ap.gov.in/*",
+    "https://*.tirupatibalaji.ap.gov.in/*"
+  ],
+  "action": {
+    "default_title": "TTD SmartFill Pro",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.ttdevasthanams.ap.gov.in/*",
+        "https://*.tirupatibalaji.ap.gov.in/*"
+      ],
+      "js": [
+        "shared/constants.js",
+        "shared/storage.js",
+        "shared/fields.js",
+        "shared/filler.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "fill-all-visible": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Fill all visible TTD booking fields"
+    }
+  }
+}

@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <body>
+    <input name="pilgrimEmail" label="Email Address" />
+    <input name="pilgrimCity" label="City" />
+    <input name="pilgrimState" label="State" />
+    <input name="pilgrimCountry" label="Country" />
+    <input name="pilgrimPincode" label="Pincode" />
+    <section class="pilDetails_mainContainer__fixture">
+      <input name="name" label="Name" />
+      <input name="age" label="Age" />
+      <select name="gender" aria-label="Gender"><option>Male</option><option>Female</option></select>
+      <select name="idType" aria-label="Photo ID Proof"><option>Aadhaar Card</option><option>Passport</option></select>
+      <input name="idNumber" label="Photo ID Number" />
+    </section>
+    <section class="pilDetails_mainContainer__fixture">
+      <input name="name" label="Name" />
+      <input name="age" label="Age" />
+      <select name="gender" aria-label="Gender"><option>Male</option><option>Female</option></select>
+      <select name="idType" aria-label="Photo ID Proof"><option>Aadhaar Card</option><option>Passport</option></select>
+      <input name="idNumber" label="Photo ID Number" />
+    </section>
+    <section class="pilDetails_mainContainer__fixture">
+      <input name="name" label="Name" />
+      <input name="age" label="Age" />
+      <select name="gender" aria-label="Gender"><option>Male</option><option>Female</option></select>
+      <select name="idType" aria-label="Photo ID Proof"><option>Aadhaar Card</option><option>Passport</option></select>
+      <input name="idNumber" label="Photo ID Number" />
+    </section>
+    <pre id="result">pending</pre>
+    <script src="../shared/constants.js"></script>
+    <script src="../shared/fields.js"></script>
+    <script src="../shared/filler.js"></script>
+    <script>
+      (async () => {
+        const profiles = [
+          { fullName: "Profile One", age: "31", gender: "Male", idProof: "Aadhaar Card", idNumber: "1111" },
+          { fullName: "Profile Two", age: "42", gender: "Female", idProof: "Passport", idNumber: "P2222" }
+        ];
+        const result = await TTDFiller.fill({
+          general: { email: "test@example.com", city: "Tirupati", state: "Andhra Pradesh", country: "India", pincode: "517501" },
+          profiles,
+          speed: "instant",
+          allVisible: true
+        });
+        const names = [...document.querySelectorAll('input[name="name"]')].map((input) => input.value);
+        const ids = [...document.querySelectorAll('input[name="idNumber"]')].map((input) => input.value);
+        const blockedResult = await TTDFiller.fill({
+          general: { email: "test@example.com", city: "Tirupati", state: "Andhra Pradesh", country: "India", pincode: "517501" },
+          profiles: [profiles[0]],
+          speed: "instant",
+          allVisible: true
+        });
+        const rows = [...document.querySelectorAll(".pilDetails_mainContainer__fixture")];
+        rows.forEach((row) => row.querySelectorAll("input, select").forEach((field) => { field.value = ""; }));
+        window.__ttdSmartFillDone = false;
+        const oneProfileResult = await TTDFiller.fill({
+          general: { email: "test@example.com", city: "Tirupati", state: "Andhra Pradesh", country: "India", pincode: "517501" },
+          profiles: [profiles[0]],
+          speed: "instant",
+          allVisible: true
+        });
+        const oneProfileNames = [...document.querySelectorAll('input[name="name"]')].map((input) => input.value);
+        const oneProfileIds = [...document.querySelectorAll('input[name="idNumber"]')].map((input) => input.value);
+        document.querySelector("#result").textContent = JSON.stringify({ result, names, ids, blockedResult, oneProfileResult, oneProfileNames, oneProfileIds });
+      })();
+    </script>
+  </body>
+</html>

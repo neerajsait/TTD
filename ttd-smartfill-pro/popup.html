@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TTD SmartFill Pro</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div class="brand-mark" aria-hidden="true">T</div>
+        <div>
+          <p class="eyebrow">PRIVATE BOOKING HELPER</p>
+          <h1>TTD SmartFill <span>Pro</span></h1>
+        </div>
+        <button class="icon-button" id="open-options" title="Open settings" aria-label="Open settings">⚙</button>
+      </header>
+
+      <div class="portal-status" id="portal-status">
+        <span class="status-dot"></span>
+        <span id="portal-status-text">Checking TTD page…</span>
+      </div>
+
+      <nav class="tabs" aria-label="SmartFill sections">
+        <button class="tab active" data-tab="general">General Details</button>
+        <button class="tab" data-tab="profiles">Profiles <span class="tab-count" id="profile-count">0</span></button>
+      </nav>
+
+      <section class="tab-panel active" id="general-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Shared booking details</h2>
+            <p>Saved locally and reused on every TTD form.</p>
+          </div>
+          <span class="local-badge">LOCAL ONLY</span>
+        </div>
+        <form id="general-form" class="form-grid">
+          <label class="field full">
+            <span>Email Address</span>
+            <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+          </label>
+          <label class="field">
+            <span>City</span>
+            <input name="city" type="text" placeholder="Your city" required />
+          </label>
+          <label class="field">
+            <span>State</span>
+            <input name="state" type="text" placeholder="Your state" required />
+          </label>
+          <label class="field">
+            <span>Country</span>
+            <input name="country" type="text" placeholder="Country" required />
+          </label>
+          <label class="field">
+            <span>Pincode</span>
+            <input name="pincode" inputmode="numeric" maxlength="10" placeholder="Postal code" required />
+          </label>
+          <button class="primary-button full" type="submit">Save General Details</button>
+        </form>
+        <div class="action-row">
+          <button class="secondary-button" id="fill-all-general">Fill all visible fields</button>
+          <span class="shortcut-hint">Ctrl + Shift + F</span>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="profiles-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Pilgrim profiles</h2>
+            <p>Keep ID and demographic details ready to fill in order.</p>
+          </div>
+          <button class="secondary-button compact" id="new-profile">+ New</button>
+        </div>
+        <label class="search-field">
+          <span aria-hidden="true">⌕</span>
+          <input id="profile-search" type="search" placeholder="Search profiles" />
+        </label>
+        <div id="profile-list" class="profile-list"></div>
+        <div id="profile-empty" class="empty-state" hidden>
+          <div class="empty-icon">+</div>
+          <strong>No profiles yet</strong>
+          <span>Add a pilgrim profile to enable autofill.</span>
+          <button class="primary-button" id="empty-new-profile">Create first profile</button>
+        </div>
+
+        <form id="profile-form" class="profile-form" hidden>
+          <div class="form-heading">
+            <div>
+              <h3 id="profile-form-title">New profile</h3>
+              <p>Fields are entered in the TTD-required order.</p>
+            </div>
+            <button type="button" class="text-button" id="cancel-profile">Cancel</button>
+          </div>
+          <input type="hidden" name="id" />
+          <label class="field full"><span>Full Name</span><input name="fullName" required placeholder="As on photo ID" /></label>
+          <div class="form-grid compact-grid">
+            <label class="field"><span>Age</span><input name="age" type="number" min="1" max="120" required placeholder="Age" /></label>
+            <label class="field"><span>Gender</span><select name="gender" required><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></label>
+            <label class="field full"><span>Photo ID Proof</span><select name="idProof" required><option value="">Select ID proof</option><option>Aadhaar Card</option><option>Passport</option></select></label>
+            <label class="field full"><span>Photo ID Number</span><input name="idNumber" required placeholder="Document number" /></label>
+          </div>
+          <button class="primary-button full" type="submit">Save profile</button>
+        </form>
+
+        <div class="profile-tools">
+          <button class="text-button" id="export-data">Export backup</button>
+          <button class="text-button" id="import-data">Import backup</button>
+          <input id="import-file" type="file" accept="application/json,.json" hidden />
+        </div>
+      </section>
+
+      <footer class="app-footer">
+        <span><span class="lock">▣</span> Nothing leaves this browser</span>
+        <button class="text-button" id="privacy-link">Privacy & settings</button>
+      </footer>
+      <div class="message" id="message" role="status" aria-live="polite"></div>
+    </main>
+    <script src="shared/constants.js"></script>
+    <script src="shared/storage.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
